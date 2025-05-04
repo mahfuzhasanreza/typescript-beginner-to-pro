@@ -312,3 +312,50 @@ const add: Add = (x, y) => {
   return x + y;
 }
 ```
+
+## Union Type
+- Union type is a way to define a type that can be one of several types. It is used to define a type that can be one of several types.
+Example: 
+```typescript
+type Developer = 'Frontend' | 'Backend' | 'Fullstack';
+type ProblemSolving = 'Easy' | 'Medium' | 'Hard';
+
+const newDeveloper: Developer = 'Frontend';
+const newProblemSolving: ProblemSolving = 'Easy';
+
+type DeveloperType = Developer | ProblemSolving;
+const newDeveloperType: DeveloperType = 'Frontend';
+const newProblemSolvingType: DeveloperType = 'Easy';
+
+type User = {
+  name: string;
+  age: number;
+  gender: 'male' | 'female';
+}
+const user: User = {
+  name: 'John Doe',
+  age: 30,
+  gender: 'male',
+};
+```
+## Intersection Type
+- Intersection type is a way to define a type that combines multiple types into one. It is used to define a type that can be one of several types.
+Example: 
+```typescript
+type FrontendDeveloper = {
+  skills: string[];
+  designation1: 'Frontend Developer';
+}
+type BackendDeveloper = {
+  skills: string[];
+  designation2: 'Backend Developer';
+}
+
+type FullstackDeveloper = FrontendDeveloper & BackendDeveloper;
+
+const fullstackDeveloper: FullstackDeveloper = {
+  skills: ['HTML', 'CSS', 'JavaScript', 'Node.js'],
+  designation1: 'Frontend Developer',
+  designation2: 'Backend Developer'
+};
+```
