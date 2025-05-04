@@ -113,3 +113,49 @@ Example:
 let person: [string, number] = ["John", 30]; // tuple of string and number
 let person2: [string, number, boolean] = ["John", 30, true]; // tuple of string, number and boolean
 ```
+
+## object Type
+- Implicit object type
+Example: 
+```typescript
+let person = {
+  name: "John",
+  age: 30,
+  isMarried: false
+}; // person is implicitly assigned the type { name: string, age: number, isMarried: boolean }
+```
+- Explicit object type
+Example: 
+```typescript
+let person: { name: string, age: number, isMarried: boolean } = {
+  name: "John",
+  age: 30,
+  isMarried: false
+}; // person is explicitly assigned the type { name: string, age: number, isMarried: boolean }
+```
+- Explicit object type with optional properties
+Example: 
+```typescript
+let person: { name: string, age: number, isMarried?: boolean } = {
+  name: "John",
+  age: 30
+}; // person is explicitly assigned the type { name: string, age: number, isMarried?: boolean }
+```
+- Literal object type
+Example: 
+```typescript
+let person: { name: "John", age: 30, isMarried: false } = {
+  name: "John",
+  age: 30,
+  isMarried: false
+}; // person is explicitly assigned the type { name: "John", age: 30, isMarried: false }
+```
+- readonly object type
+Example: 
+```typescript
+let person: { readonly name: string, age: number, isMarried: boolean } = {
+  name: "John",
+  age: 30,
+  isMarried: false
+}; // person is explicitly assigned the type { readonly name: string, age: number, isMarried: boolean }
+```
