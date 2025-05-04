@@ -411,3 +411,57 @@ const city = person?.address?.city; // city is 'Dhaka'
 const country = person?.address?.country; // country is 'Bangladesh'
 const state = person?.address?.state; // state is undefined
 ```
+
+## Nullable Type
+- Nullable type is a way to define a type that can be null or undefined. It is used to define a type that can be null or undefined.
+Example: 
+```typescript
+const searchName = (value: string | null): string => {
+  if (value === null) {
+    return "No name found";
+  }
+  return value;
+}
+const name1 = searchName("Mahfuz"); // name1 is 'Mahfuz'
+const name2 = searchName(null); // name2 is 'No name found'
+```
+
+## Unknown Type
+- Unknown type is a way to define a type that can be any type. It is used to define a type that can be any type.
+- It can be determine type at runtime. As like JS typeof operator.
+Example: 
+```typescript
+const getSpeedInMeterPerSecond = (value: unknown) => {
+  if(typeof value === 'number'){
+      const convertedSpeed = (value * 1000) / 3600;
+      console.log(`The speed is ${convertedSpeed} ms^-1`);
+  } else if(typeof value === 'string'){
+      const [result, unit] = value.split(' ');
+      const convertedSpeed = (parseFloat(result) * 1000) / 3600;
+      console.log(`The speed is ${convertedSpeed} ms^-1`);
+  } else {
+      console.log(`Wrong input`);
+  }
+}
+
+getSpeedInMeterPerSecond(1000); // `The speed is 277.77777777777777 ms^-1`
+getSpeedInMeterPerSecond(`1000 kmh^-1`); // `The speed is 277.77777777777777 ms^-1`
+getSpeedInMeterPerSecond(null); // `Wrong input`
+```
+
+## Never Type
+- Never type is a way to define a type that can never occur. It is used to define a type that can never occur.
+Example: 
+```typescript
+const throwError = (message: string): never => {
+  throw new Error(message);
+}
+
+throwError("This is an error"); // This will throw an error
+
+const infiniteLoop = (): never => {
+  while (true) {
+    console.log("Infinite loop");
+  }
+}
+```
