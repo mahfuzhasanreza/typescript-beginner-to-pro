@@ -249,3 +249,28 @@ const greetFriends = (...friends: string[]) => {
 }
 greetFriends("Mahfuz", "Sakib", "Shamim"); // Hello Mahfuz, Hello Sakib, Hello Shamim
 ```
+
+## Destructuring
+- Destructuring is a syntax that allows you to unpack values from arrays or properties from objects into distinct variables.
+
+- Object Destructuring
+Example: 
+```typescript
+const person = {
+  name: {
+    firstName: "Mahfuz",
+    lastName: "Hossain"
+  }
+  age: 30,
+  isMarried: false
+};
+const { name: { firstName: fName, lastName }, age, isMarried } = person;
+```
+- Array Destructuring
+Example: 
+```typescript
+const friends = ["Mahfuz", "Sakib", "Shamim", "Shamim", "Sakib"];
+const [firstFriend, secondFriend] = friends;
+const [, , thirdFriend] = friends;
+const [, , , ...restFriends] = friends;
+```

@@ -33,4 +33,25 @@
         friends.forEach((friend: string) => console.log(`Hello ${friend}`));
     }
     greetFriends("shamim", "sabbir", "mahfuz");
+
+    // destructuring
+    
+    // object destructuring
+    const user = {
+        id: 1,
+        name: {
+            firstName: 'John',
+            middleName: 'Doe',
+            lastName: 'Smith',
+        },
+        age: 30,
+        address: "123 Main St",
+    }
+    const { id, name: { firstName: fName, lastName }, age } = user;
+
+    // array destructuring
+    const myFriends = ['shamim', 'sabbir', 'mahfuz'];
+    const [a, b, bestFriend] = myFriends;
+    const [,, bestFriend2] = myFriends;
+    const [,, bestFriend3, ...rest] = myFriends;
 }
