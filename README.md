@@ -159,3 +159,53 @@ let person: { readonly name: string, age: number, isMarried: boolean } = {
   isMarried: false
 }; // person is explicitly assigned the type { readonly name: string, age: number, isMarried: boolean }
 ```
+
+# Functions in Typescript
+- 2 types of function
+  - normal function
+  - arrow function
+
+- normal function
+Example: 
+```typescript
+function add(x: number, y: number): number {
+  return x + y;
+}
+```
+- arrow function
+Example: 
+```typescript
+const add = (x: number, y: number): number => {
+  return x + y;
+}
+```
+- function with default parameter
+Example: 
+```typescript
+function add(x: number, y: number = 10): number {
+  return x + y;
+}
+```
+
+## Method
+- Method is a function that is defined inside a class or an object.
+Example: 
+```typescript
+const person = {
+  name: "Mahfuz",
+  balance: 1000,
+  addBalance(balance: number): string{
+    return `Your balance is ${this.balance + balance}`;
+  }
+};
+
+console.log(person.addBalance(100)); // Your balance is 1100
+```
+
+## Callback Function
+- A callback function is a function that is passed as an argument to another function and is executed after the completion of that function.
+Example: 
+```typescript
+const arr: number[] = [1, 2, 3, 4, 5];
+const newArr: number[] = arr.map((item: number): number => item * item);
+```
