@@ -359,3 +359,55 @@ const fullstackDeveloper: FullstackDeveloper = {
   designation2: 'Backend Developer'
 };
 ```
+
+- added `npm i -g ts-node-dev` for running ts file
+- `ts-node-dev --respawn --transpile-only server.ts` for running ts file
+
+## Ternary Operator
+- The ternary operator is a shorthand way to write an if-else statement. It is used to write a conditional statement in a single line.
+Example: 
+```typescript
+const age: number = 18;
+const isAdult: boolean = age >= 18 ? true : false; // isAdult is true
+
+console.log(isAdult); // true
+```
+
+## Nullish Coalescing Operator
+- The nullish coalescing operator is used to provide a default value for a variable if the variable is null or undefined. It is used to provide a default value for a variable if the variable is null or undefined.
+Example: 
+```typescript
+const isAuthenticated = null;
+const isLoggedIn = isAuthenticated ?? 'Guest'; // isLoggedIn is 'Guest'
+console.log(isLoggedIn); // 'Guest'
+
+const isAuthenticated2 = undefined;
+const isLoggedIn2 = isAuthenticated2 ?? 'Guest'; // isLoggedIn2 is 'Guest'
+console.log(isLoggedIn2); // 'Guest'
+
+const isAuthenticated3 = false;
+const isLoggedIn3 = isAuthenticated3 ?? 
+'Guest'; // isLoggedIn3 is false
+console.log(isLoggedIn3); // false
+
+const isAuthenticated4 = "mahfuz";
+const isLoggedIn4 = isAuthenticated4 ?? 'Guest'; // isLoggedIn4 is 'mahfuz'
+console.log(isLoggedIn4); // 'mahfuz'
+```
+
+## Optional Chaining
+- The optional chaining operator is used to access properties of an object that may be null or undefined. It is used to access properties of an object that may be null or undefined.
+Example: 
+```typescript
+const person = {
+  name: "Mahfuz",
+  age: 30,
+  address: {
+    city: "Dhaka",
+    country: "Bangladesh"
+  }
+};
+const city = person?.address?.city; // city is 'Dhaka'
+const country = person?.address?.country; // country is 'Bangladesh'
+const state = person?.address?.state; // state is undefined
+```
