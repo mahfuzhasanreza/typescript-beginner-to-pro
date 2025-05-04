@@ -209,3 +209,43 @@ Example:
 const arr: number[] = [1, 2, 3, 4, 5];
 const newArr: number[] = arr.map((item: number): number => item * item);
 ```
+
+## Spread Operator
+- The spread operator is used to expand an iterable (array, object, etc.) into its individual elements.
+Example: 
+```typescript
+const arr1: number[] = [1, 2, 3];
+const arr2: number[] = [4, 5, 6];
+const arr3: number[] = [...arr1, ...arr2]; // arr3 = [1, 2, 3, 4, 5, 6]
+
+const bros1: string[] = ["Mahfuz", "Sakib"];
+const bros2: string[] = ["Sakib", "Mahfuz"];
+bros1.push(...bros2); // bros1 = ["Mahfuz", "Sakib", "Sakib", "Mahfuz"]
+```
+Example for Object:
+```typescript
+const mentors1 = {
+  typescript: "Mahfuz",
+  javascript: "Sakib",
+}
+const mentors2 = {
+  react: "Sakib",
+  node: "Mahfuz",
+}
+const mentors3 = {
+  ...mentors1,
+  ...mentors2,
+} // mentors3 = { typescript: "Mahfuz", javascript: "Sakib", react: "Sakib", node: "Mahfuz" }
+```
+
+## Rest Operator
+- The rest operator is used to collect all the remaining elements of an iterable (array, object, etc.) into a single array or object.
+Example: 
+```typescript
+const greetFriends = (...friends: string[]) => {
+  frineds.forEach((friend) => {
+    console.log(`Hello ${friend}`);
+  });
+}
+greetFriends("Mahfuz", "Sakib", "Shamim"); // Hello Mahfuz, Hello Sakib, Hello Shamim
+```

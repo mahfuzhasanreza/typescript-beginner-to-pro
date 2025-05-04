@@ -1,3 +1,5 @@
+{
+
 // function
 
 // normal function
@@ -26,3 +28,6 @@ const poorUser = {
 // callback function
 const arr: number[] = [1, 2, 3, 4, 5];
 const newArr: number[] = arr.map((elem: number): number => elem*elem);
+
+
+}

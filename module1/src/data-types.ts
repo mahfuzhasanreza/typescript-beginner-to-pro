@@ -1,3 +1,5 @@
+{
+
 // basic data type
 
 // string
@@ -61,4 +63,6 @@ const user4: {
 } = {
     firstName: 'mahfuz',
     lastName: 'reza',
+}
+
 }
