@@ -264,7 +264,7 @@ const person = {
   age: 30,
   isMarried: false
 };
-const { name: { firstName: fName, lastName }, age, isMarried } = person;
+const { name: { firstName: fName, lastName }, age, isMarried } = person; // fName is name alias
 ```
 - Array Destructuring
 Example: 
@@ -273,4 +273,42 @@ const friends = ["Mahfuz", "Sakib", "Shamim", "Shamim", "Sakib"];
 const [firstFriend, secondFriend] = friends;
 const [, , thirdFriend] = friends;
 const [, , , ...restFriends] = friends;
+```
+
+## Type Alias
+- Type alias is a way to create a new name for an existing type. It is used to give a type a new name.
+- Type alias for Object
+Example: 
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  isMarried?: boolean;
+};
+const person: Person = {
+  name: "Mahfuz",
+  age: 30,
+  isMarried: false
+}; // person is explicitly assigned the type Person
+const person2: Person = {
+  name: "Mahfuz",
+  age: 30
+}; // person2 is explicitly assigned the type Person
+```
+- Type alias for Normal Type
+Example: 
+```typescript
+type UserName = string;
+type IsStudent = boolean;
+const userName: UserName = 'mahfuz';
+const isStudent: IsStudent = true;
+```
+
+- Type alias for Function
+Example: 
+```typescript
+type Add = (x: number, y: number) => number;
+const add: Add = (x, y) => {
+  return x + y;
+}
 ```

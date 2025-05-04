@@ -47,7 +47,7 @@
         age: 30,
         address: "123 Main St",
     }
-    const { id, name: { firstName: fName, lastName }, age } = user;
+    const { id, name: { firstName: fName, lastName }, age } = user; // fName is name alias
 
     // array destructuring
     const myFriends = ['shamim', 'sabbir', 'mahfuz'];
