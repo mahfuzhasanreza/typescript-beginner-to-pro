@@ -874,3 +874,24 @@ const showTodo = async () => {
 };
 showTodo();
 ```
+
+## Conditional Types
+- Conditional types are a way to define a type based on a condition.
+Example: 
+```typescript
+type a = null;
+type b = undefined;
+
+type x = a extends null ? true : false;
+type y = a extends null ? true : b extends undefined ? undefined : any;
+```
+Example: 
+```typescript
+type Sheikh = {
+  bike: string;
+  car: string;
+  ship: string;
+}
+type CheckVehicle<T> = T extends keyof Sheikh ? true : false;
+type hasShip = CheckVehicle<"ship">;
+```
