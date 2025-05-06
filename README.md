@@ -799,3 +799,31 @@ const student2 = addCourseToStudent({
   hasWatch: 'Apple Watch'
 });
 ```
+
+## keyof Operator
+- The keyof operator is used to get the keys of an object as a union type.
+Example: 
+```typescript
+type Vehicle = {
+  bike: string;
+  car: string;
+  ship: string;
+}
+type ownerType = "bike" | "car" | "ship"; // manually
+type Owner2 = keyof Vehicle;
+```
+
+## keyof with Generics Constraint
+- The keyof operator can be used with generics constraint.
+Example: 
+```typescript
+const user = {
+  name: 'mahfuz',
+  age: 20,
+  address: 'syl'
+}
+const getPropertyValue = <X, Y extends keyof X>(obj: X, key: Y) => {
+  return obj[key];
+}
+getPropertyValue(user, 'name');
+```
