@@ -481,3 +481,44 @@ Now we will explore:
 10. Mapped types: Want to transform existing types into something new? Explore mapped types, a technique for reshaping types based on your defined rules.
 11. Utility Types: TypeScript comes with built-in helpers (utility types) that offer common functionalities. We'll explore these helpers to make your code shorter and easier to maintain.
 
+## Type Assertion
+- Type assertion is a way to tell TypeScript to treat a variable as a specific type.
+- It is used to override the type of a variable.
+Example: 
+```typescript
+let value: unknown = "Hello";
+let strLength: number = (value as string).length; // strLength is 5
+
+type CustomError = {
+  message: string
+}
+try{
+        
+} catch(error){
+    console.log((error as CustomError).message);
+}
+```
+
+## Type Narrowing
+- Type narrowing is a way to refine the type of a variable based on certain conditions.
+- It is used to narrow down the type of a variable based on certain conditions.
+Example: 
+```typescript
+const kgToGm = (value: string | number): string | number | undefined => {
+  if(typeof value === 'string'){
+      const convertedValue = parseFloat(value)*1000;
+      return `The converted value: ${convertedValue}`;
+  } else if(typeof value === 'number'){
+      return value*1000
+  }
+}
+
+const result1 = kgToGm(1000) as number;
+const result2 = kgToGm("1000") as string;
+const result3 = kgToGm(true) as undefined;
+
+console.log(result1); // 1000000
+console.log(result2); // The converted value: 1000000
+console.log(result3); // undefined
+```
+
