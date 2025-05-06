@@ -16,8 +16,8 @@ TS Code can be transpiled older version of JS (es6, es5, es3).
 - nfm: Node Fast Manager
 
 ## TS configure
--node.js can not run TS code
--should call TS compiler (this convert it to JS), TS compiler: tsc
+- node.js can not run TS code
+- should call TS compiler (this convert it to JS), TS compiler: tsc
 
 for TS configuration file: tsc --init
 
