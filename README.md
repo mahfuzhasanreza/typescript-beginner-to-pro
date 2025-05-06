@@ -522,3 +522,121 @@ console.log(result2); // The converted value: 1000000
 console.log(result3); // undefined
 ```
 
+## Interface
+- Interface is a way to define the structure of an object.
+- It is not used to define the type of a variable or primitive type.
+
+Example: 
+```typescript
+interface Person {
+  name: string;
+  age: number;
+  isMarried?: boolean; // optional property
+}
+const person: Person = {
+  name: "Mahfuz",
+  age: 30,
+  isMarried: false
+}; // person is explicitly assigned the type Person
+const person2: Person = {
+  name: "Mahfuz",
+  age: 30
+}; // person2 is explicitly assigned the type Person
+```
+
+## Type vs Interface
+- Type is a way to define the type of a variable or primitive type or object.
+- Interface is a way to define the structure of an object.
+
+Example: 
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  isMarried?: boolean; // optional property
+}
+const person: Person = {
+  name: "Mahfuz",
+  age: 30,
+  isMarried: false
+}; // person is explicitly assigned the type Person
+const person2: Person = {
+  name: "Mahfuz",
+  age: 30
+}; // person2 is explicitly assigned the type Person
+
+type rollNumber = number;
+
+const rollNumber: rollNumber = 123456; // rollNumber is explicitly assigned the type number
+```
+## Intersection and Extends
+- Intersection is a way to combine multiple types into one.
+- Extends is a way to inherit properties from one interface to another.
+- Type can make interface by extending.
+- Interface can make type by intersection.
+Example: 
+```typescript
+type Student = {
+  name: string;
+  age: number;
+  isMarried?: boolean; // optional property
+}
+type ClassRepresentative = {
+  designation: string;
+  salary: number;
+}
+type StudentClassRepresentative = Student & ClassRepresentative; // intersection of Student and ClassRepresentative
+const student: StudentClassRepresentative = {
+  name: "Mahfuz",
+  age: 30,
+  isMarried: false,
+  designation: "Class Representative",
+  salary: 100000
+}; // student is explicitly assigned the type StudentClassRepresentative
+
+interface Person {
+  name: string;
+  age: number;
+  isMarried?: boolean; // optional property
+}
+interface Employee extends Person {
+  designation: string;
+  salary: number;
+}
+const employee: Employee = {
+  name: "Mahfuz",
+  age: 30,
+  isMarried: false,
+  designation: "Software Engineer",
+  salary: 100000
+}; // employee is explicitly assigned the type Employee
+```
+
+## Interface on Array
+- Interface can be used on array.
+- In JavaScript, array is an object.
+Example: 
+```typescript
+type Roll1 = number[];
+
+interface Roll {
+  [index: number]: number;
+}
+
+const rollNumber: Roll = [1, 2, 3, 4, 5];
+```
+
+## Interface on Function
+- Interface can be used on function.
+- In JavaScript, function is an object.
+Example: 
+```typescript
+type Add1 = (x: number, y: number) => number;
+
+interface Add {
+  (x: number, y: number): number;
+}
+const add: Add = (x, y) => {
+  return x + y;
+}
+```
