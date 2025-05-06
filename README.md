@@ -895,3 +895,58 @@ type Sheikh = {
 type CheckVehicle<T> = T extends keyof Sheikh ? true : false;
 type hasShip = CheckVehicle<"ship">;
 ```
+
+## Map in TypeScript
+Example: 
+```typescript
+const arrayOfNumbers: number[] = [1, 4, 5];
+
+// manually
+const arrOfString: string[] = ['1', '4', '5'];
+// using map
+const arrOfString2: string[] = arrayOfNumbers.map(
+    (number) => number.toString()
+);
+```
+
+## Mapped Types
+- Mapped types are a way to create new types based on existing types.
+Example: 
+```typescript
+type AreaNumber = {
+  height: number;
+  width: number;
+}
+
+// manually
+type AreaString = {
+  height: string;
+  width: string;
+}
+// using map
+type AreaString2 = {
+  [key in keyof AreaNumber]: string
+}
+```
+
+## Lookup Types
+- Lookup types are a way to create new types based on existing types.
+Example: 
+```typescript
+type AreaNumber = {
+  height: number;
+  width: number;
+}
+type Height = AreaNumber["height"];
+type Width = AreaNumber["width"];
+```
+Example: 
+```typescript
+type AreaString3<T> = {
+  [key in keyof T]: T[key];
+}
+const area: AreaString3<{ height: string; width: number }> = {
+  height: "100",
+  width: 50,
+}
+```
