@@ -640,3 +640,41 @@ const add: Add = (x, y) => {
   return x + y;
 }
 ```
+
+## Generics
+- Generics is a way to define a type that can be used with different types of data.
+Example: 
+```typescript
+type GenericArray<T> = Array<T>
+
+const numbers: GenericArray<number> = [1, 2, 3, 4, 5];
+const strings: GenericArray<string> = ["John", "Jane", "Doe"];
+```
+
+## Generics in Array of Objects
+- Generics can be used in array of objects.
+Example: 
+```typescript
+type GenericArray<T> = Array<T>
+
+const user: GenericArray<{name: string, age: number}> = [
+  {
+    name: 'mahfuz',
+    age: 100,
+  },
+  {
+    name: 'hasan',
+    age: 10,
+  }
+]
+```
+
+## Generic Tuple
+- Generics can be used in tuple.
+Example: 
+```typescript
+type GenericTuple<T, U> = [T, U]
+
+const person: GenericTuple<string, number> = ["John", 30]; // tuple of string and number
+const personWithID: GenericTuple<number, {name: string, age: number}> = [1, {name: "John", age: 30}]; // tuple of string and object
+```
