@@ -678,3 +678,68 @@ type GenericTuple<T, U> = [T, U]
 const person: GenericTuple<string, number> = ["John", 30]; // tuple of string and number
 const personWithID: GenericTuple<number, {name: string, age: number}> = [1, {name: "John", age: 30}]; // tuple of string and object
 ```
+
+## Generic with Interface
+- Generics can be used with interface.
+Example: 
+```typescript
+interface Developer<T, X = null> {
+  name: string;
+  computer: {
+    brand: string;
+    model: string;
+    releaseYear: number;
+  },
+  smartWatch: T;
+  bike?: X;
+}
+
+const poorDeveloper : Developer<{
+  brand: string;
+  model: string;
+  display: string;
+}> = {
+  name: 'Mahfuz',
+  computer: {
+    brand: 'hp',
+    model: 'pavilion',
+    releaseYear: 2000,
+  },
+  smartWatch: {
+    brand: 'Emilab',
+    model: 'kw66',
+    display: 'Oled'
+  }
+}
+
+interface AppleWatch {
+  brand: string;
+  model: string;
+  heartTrack: boolean;
+  sleepTrack: boolean;
+}
+interface YamahaBike {
+  model: string;
+  engineCapacity: string;
+}
+
+const richDeveloper : Developer<AppleWatch, YamahaBike> = {
+  name: 'Mahfuz',
+  computer: {
+    brand: 'hp',
+    model: 'pavilion',
+    releaseYear: 2000,
+  },
+  smartWatch: {
+    brand: 'Apple',
+    model: 'kw66',
+    heartTrack: true,
+    sleepTrack: true
+  },
+  bike: {
+    model: 'Yamaha',
+    engineCapacity: '100cc',
+  }
+}
+```
+
