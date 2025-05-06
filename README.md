@@ -743,3 +743,35 @@ const richDeveloper : Developer<AppleWatch, YamahaBike> = {
 }
 ```
 
+## Generic with Function
+- Generics can be used with function.
+Example: 
+```typescript
+const createArray = (param: string): string[] => {
+  return [param];
+}
+const res1 = createArray('Bangladesh');
+
+const createArrayWithGeneric = <T>(param: T): T[] => {
+  return [param];
+}
+const resGeneric = createArrayWithGeneric<boolean>(true);
+
+type User = {
+  id: number;
+  name: string;
+}
+const resGenericObj = createArrayWithGeneric<User>({id: 2, name: 'mahfuz'})
+```
+
+## Generic Array with Tuple
+- Generics can be used with array of tuple.
+Example: 
+```typescript
+const createArrayWithTuple = <T, Q>(param1: T, param2: Q): [T, Q] => {
+    return [param1, param2];
+}
+const res3 = createArrayWithTuple<string, number>("Bangladesh", 123);
+const res4 = createArrayWithTuple<string, {name: string}>("Bangladesh", {name: 'mahfuz'});
+```
+
