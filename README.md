@@ -775,3 +775,27 @@ const res3 = createArrayWithTuple<string, number>("Bangladesh", 123);
 const res4 = createArrayWithTuple<string, {name: string}>("Bangladesh", {name: 'mahfuz'});
 ```
 
+## Constraints
+- Constraints are used to limit the types that can be used with generics.
+Example: 
+```typescript
+const addCourseToStudent = <T extends {id: number; name: string; email: string}>(student: T) => {
+  const course = 'Learn C++';
+  return {
+    ...student,
+    course
+  }
+}
+const student1 = addCourseToStudent({
+  id: 1,
+  name: 'mahfuz',
+  email: 'm@gmail.com',
+  devType: 'Frontend Dev'
+});
+const student2 = addCourseToStudent({
+  id: 2,
+  name: 'hasan',
+  email: 'h@gmail.com',
+  hasWatch: 'Apple Watch'
+});
+```
