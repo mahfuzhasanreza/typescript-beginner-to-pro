@@ -950,3 +950,78 @@ const area: AreaString3<{ height: string; width: number }> = {
   width: 50,
 }
 ```
+
+## Utility Types
+- Utility types are a way to create new types based on existing types.
+
+- Pick Utility Type: Pick is a utility type that allows you to create a new type by picking specific properties from an existing type.
+Example: 
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  email?: string;
+  contactNo: string;
+}
+type Name = Pick<Person, "name" | "age">;
+```
+- Omit Utility Type: Omit is a utility type that allows you to create a new type by omitting specific properties from an existing type.
+Example: 
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  email?: string;
+  contactNo: string;
+}
+type Name = Omit<Person, "name" | "age">;
+```
+
+- Required Utility Type: Required is a utility type that makes all properties of a type required.
+Example: 
+```typescript
+type Person = {
+  name: string;
+  age?: number;
+  email?: string;
+  contactNo?: string;
+}
+type RequiredPerson = Required<Person>;
+```
+
+- Partial Utility Type: Partial is a utility type that makes all properties of a type optional.
+Example: 
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  email?: string;
+  contactNo: string;
+}
+type PartialPerson = Partial<Person>;
+```
+
+- Readonly Utility Type: Readonly is a utility type that makes all properties of a type readonly.
+Example: 
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  email?: string;
+  contactNo: string;
+}
+type ReadonlyPerson = Readonly<Person>;
+```
+
+- Record Utility Type: Record is a utility type that creates a new type with specific properties and their types.
+Example: 
+```typescript
+type MyObj = Record<string, number>
+const obj1: MyObj = {
+  a: 1,
+  b: 2,
+  c: 3,
+}
+
+const emptyObj: Record<string, unknown> = {};
+```
