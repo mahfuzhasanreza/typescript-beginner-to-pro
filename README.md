@@ -276,7 +276,8 @@ const [, , , ...restFriends] = friends;
 ```
 
 ## Type Alias
-- Type alias is a way to create a new name for an existing type. It is used to give a type a new name.
+- Type alias is a way to create a new name for an existing type.
+
 - Type alias for Object
 Example: 
 ```typescript
@@ -295,6 +296,7 @@ const person2: Person = {
   age: 30
 }; // person2 is explicitly assigned the type Person
 ```
+
 - Type alias for Normal Type
 Example: 
 ```typescript
@@ -1024,4 +1026,197 @@ const obj1: MyObj = {
 }
 
 const emptyObj: Record<string, unknown> = {};
+```
+
+# TypeScript Practice Set
+
+### Task 1: Basic Data Types and First Program
+
+**Objective**: Write a TypeScript program that outputs a welcome message.
+
+**Instructions**:
+
+- Create a TypeScript program.
+- Print the following message to the console:
+  > Hello World!
+
+**Answer**:
+```typescript
+const message: string = "Hello World!";
+console.log(message);
+```
+
+### Task 2: Functions, Optional, and Literal Types
+
+**Objective**: Create a function with parameters and an optional literal type.
+
+**Instructions**:
+
+- Define a function that takes:
+  - `name` (string)
+  - `age` (number)
+  - `role` (optional, with type `'admin' | 'user' | 'guest'`)
+- The function should log these values or perform a basic action.
+
+**Answer**:
+```typescript
+function greetUser(name: string, age: number, role?: 'admin' | 'user' | 'guest') {
+  console.log(`Hello ${name}, you are ${age} years old.`);
+  if (role) {
+    console.log(`Your role is ${role}.`);
+  }
+}
+greetUser("John", 25, "admin");
+```
+
+### Task 3: Object Types, Type Alias, & Literal Types
+
+**Objective**: Define a structured `Person` object using Type Aliases.
+
+**Instructions**:
+
+- Define a `Person` type alias with properties for `Name`, `Address`, `Hair and Eye Color`, `Income and Expense`, `Hobbies`, `Family Members`, `Job`, `Skills`, `Marital Status`, and `Friends`.
+
+**Answer**:
+```typescript
+type Person = {
+  name: string;
+  address: string;
+  hairColor: string;
+  eyeColor: string;
+  income: number;
+  expense: number;
+  hobbies: string[];
+  familyMembers: string[];
+  job: string;
+  skills: string[];
+  maritalStatus: 'single' | 'married' | 'divorced';
+  friends: string[];
+};
+```
+
+### Task 4: Union and Intersection Types
+
+**Objective**: Create union and intersection types using interfaces.
+
+**Instructions**:
+
+- Define interfaces `Book` and `Magazine`.
+- Create:
+- A type that is a **union** of `Book` and `Magazine`.
+- A type that is an **intersection** of `Book` and `Magazine`.
+
+**Answer**:
+```typescript
+interface Book {
+  title: string;
+  author: string;
+  pages: number;
+}
+
+interface Magazine {
+  title: string;
+  issueNumber: number;
+  monthly: boolean;
+}
+
+// Create a union type
+type BookOrMagazine = Book | Magazine;
+
+// Create an intersection type
+type BookAndMagazine = Book & Magazine;
+```
+
+### Task 5: Function Type
+
+**Objective**: Write a function that reverses a string.
+
+**Instructions**:
+
+- Write a function `reverseString` that:
+- Takes a single string argument.
+- Returns the string in reverse order.
+- **Example**:
+  - Input: `"hello"`
+  - Output: `"olleh"`
+
+**Answer**:
+```typescript
+function reverseString(str: string): string {
+  return str.split('').reverse().join('');
+}
+console.log(reverseString("hello")); // Output: "olleh"
+```
+
+### Task 6: Spread and Rest Operators, Destructuring
+
+**Objective**: Write a function that uses the rest operator for variable-length arguments.
+
+**Instructions**:
+
+- Create a function that takes multiple numeric arguments (using the rest operator) and returns the sum of all arguments.
+
+**Answer**:
+```typescript
+function sumNumbers(...numbers: number[]): number {
+  return numbers.reduce((acc, curr) => acc + curr, 0);
+}
+console.log(sumNumbers(1, 2, 3, 4)); // Output: 10
+```
+
+### Task 7: Type Assertion and Narrowing
+
+**Objective**: Write a function that behaves differently based on the input type.
+
+**Instructions**:
+
+- Create a function that accepts a parameter of type `string | number`.
+- The function should:
+  - Return the length if the input is a string.
+  - Return the square if the input is a number.
+
+**Answer**:
+```typescript
+function processInput(input: string | number): number {
+  if (typeof input === 'string') {
+    return input.length;
+  } else {
+    return input * input;
+  }
+}
+console.log(processInput("hello")); // Output: 5
+console.log(processInput(4)); // Output: 16
+```
+
+### Task 8: Intersection Types
+
+**Objective**: Practice using intersection types.
+
+**Instructions**:
+
+- Create a type `AdminUser` that is an intersection of:
+  - `User` with properties `name` and `email`
+  - `Admin` with property `adminLevel`
+- Write a function `describeAdmin(user: AdminUser): string` that returns a description of the admin user.
+
+**Answer**:
+```typescript
+type User = {
+  name: string;
+  email: string;
+};
+type Admin = {
+  adminLevel: number;
+};
+type AdminUser = User & Admin;
+
+const describeAdmin = (user: AdminUser): string => {
+  return `${user.name} (${user.email}) is an admin with level ${user.adminLevel}.`;
+};
+
+console.log(describeAdmin({
+    name: 'mahfuz',
+    email: 'm@gmail.com',
+    adminLevel: 5
+}));
 ```
