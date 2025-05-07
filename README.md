@@ -376,7 +376,7 @@ console.log(isAdult); // true
 ```
 
 ## Nullish Coalescing Operator
-- The nullish coalescing operator is used to provide a default value for a variable if the variable is null or undefined. It is used to provide a default value for a variable if the variable is null or undefined.
+- The nullish coalescing operator is used to provide a default value for a variable if the variable is null or undefined.
 Example: 
 ```typescript
 const isAuthenticated = null;
@@ -1018,7 +1018,7 @@ type ReadonlyPerson = Readonly<Person>;
 - Record Utility Type: Record is a utility type that creates a new type with specific properties and their types.
 Example: 
 ```typescript
-type MyObj = Record<string, number>
+type MyObj = Record<string, number>;
 const obj1: MyObj = {
   a: 1,
   b: 2,
@@ -1219,4 +1219,199 @@ console.log(describeAdmin({
     email: 'm@gmail.com',
     adminLevel: 5
 }));
+```
+
+### Task 9: Optional Chaining
+
+**Objective**: Use optional chaining with nested objects.
+
+**Instructions**:
+
+- Write a function `getEmployeeCity(employee)` that safely retrieves the city of an employee from a nested object using optional chaining.
+
+**Answer**:
+```typescript
+type Employee = {
+  name: string;
+  address?: {
+    city?: string;
+    country?: string;
+  };
+};
+
+const getEmployeeCity = (employee: Employee): string | undefined => {
+  return employee.address?.city;
+};
+```
+
+### Task 10: Nullish Coalescing
+
+**Objective**: Handle null and undefined values using nullish coalescing.
+
+**Instructions**:
+
+- Write a function `getDisplayName(name: string | null | undefined): string` that returns `"Anonymous"` if `name` is null or undefined.
+
+**Answer**:
+```typescript
+const getDisplayName = (name: string | null | undefined): string => {
+  return name ?? "Anonymous";
+};
+
+console.log(getDisplayName(null)); // Output: "Anonymous"
+```
+
+### Task 11: Unknown Type
+
+**Objective**: Handle different types with the `unknown` type.
+
+**Instructions**:
+
+- Write a function `processData(data: unknown)` that:
+  - Checks if `data` is a string and returns the uppercased version.
+  - If `data` is a number, returns the square of it.
+
+**Answer**:
+```typescript
+const processData = (data: unknown): string | number => {
+  if (typeof data === 'string') {
+    return data.toUpperCase();
+  } else if (typeof data === 'number') {
+    return data * data;
+  }
+  return "Invalid data type";
+};
+
+console.log(processData("hello")); // Output: "HELLO"
+console.log(processData(4)); // Output: 16
+```
+
+### Task 12: Never Type
+
+**Objective**: Use the `never` type for functions that don’t return.
+
+**Instructions**:
+
+- Write a function `handleError` that:
+  - Accepts a `message: string`.
+  - Throws an error with the given message.
+  - Use the `never` return type to indicate that this function never returns.
+
+**Answer**:
+```typescript
+const handleError = (message: string): never => {
+  throw new Error(message);
+};
+
+handleError("This is an error!"); // This will throw an error
+```
+
+### Task 13: Generics with Functions and Interfaces
+
+**Objective**: Use generics to handle different types.
+
+**Instructions**:
+
+- Create a generic function that:
+  - Accepts an array of any type.
+  - Returns a new array with duplicate values removed.
+
+**Answer**:
+```typescript
+function removeDuplicates<T>(arr: T[]): T[] {
+  return Array.from(new Set(arr));
+}
+
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+const uniqueNumbers = removeDuplicates(numbers);
+const strings = ["apple", "banana", "apple", "orange"];
+const uniqueStrings = removeDuplicates(strings);
+console.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]
+console.log(uniqueStrings); // Output: ["apple", "banana", "orange"]
+```
+
+### Task 14: Asynchronous TypeScript and Type Aliases
+
+**Objective**: Simulate an asynchronous operation with TypeScript.
+
+**Instructions**:
+
+- Write an asynchronous function that:
+  - Simulates fetching user data (containing `name` and `age`).
+  - Returns the data after a short delay.
+
+**Answer**:
+```typescript
+type UserData = {
+  name: string;
+  age: number;
+};
+
+const fetchUserData = async (): Promise<UserData> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ name: "Mahfuz", age: 30 });
+    }, 1000);
+  });
+};
+const displayUserData = async () => {
+  const user = await fetchUserData();
+  console.log(`Name: ${user.name}, Age: ${user.age}`);
+};
+
+displayUserData(); // Output: Name: Mahfuz, Age: 30
+```
+
+### Task 15: Type Guards
+
+**Objective**: Create custom type guards for more accurate type checking.
+
+**Instructions**:
+
+- Write a function `isString(value: unknown): value is string` that checks if a value is a string.
+- Use this in another function `printUpperCase(value: unknown): void` that prints the value in uppercase if it’s a string.
+
+**Answer**:
+```typescript
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
+}
+
+function printUpperCase(value: unknown): void {
+  if (isString(value)) {
+    console.log(value.toUpperCase());
+  } else {
+    console.log("Not a string");
+  }
+}
+
+printUpperCase("hello"); // Output: "HELLO"
+printUpperCase(123); // Output: "Not a string"
+```
+
+### Task 16: Utility Types and Keyof Constraints
+
+**Objective**: Access object properties dynamically using `keyof`.
+
+**Instructions**:
+
+- Create a function that:
+  - Takes an object and a key.
+  - Returns the property value from the object based on the provided key.
+  - Use `keyof` to constrain the key to valid properties of the object.
+
+**Answer**:
+```typescript
+const getProperty = <T, K extends keyof T>(obj: T, key: K): T[K] => {
+  return obj[key];
+};
+
+const user = {
+  id: 101,
+  name: "mahfuz",
+  active: true
+};
+const userName = getProperty(user, "name");
+const userId = getProperty(user, "id");
+const userActive = getProperty(user, "active");
 ```
