@@ -1415,3 +1415,166 @@ const userName = getProperty(user, "name");
 const userId = getProperty(user, "id");
 const userActive = getProperty(user, "active");
 ```
+
+---
+
+# OOP in TypeScript
+- OOP stands for Object Oriented Programming.
+
+- In this section, you'll dive into the heart of Object-Oriented Programming (OOP). Here's what you'll explore:
+1. Introduction of Object Oriented Programming: You'll learn what OOP is and how OOP principles help structure and maintain complex codebases.
+2. Class and object: Classes serve as blueprints for creating objects, which are instances that encapsulate both state and behavior. You'll learn how to define classes with properties and methods, create objects from them, and understand why this pattern is crucial for building scalable and maintainable applications.
+3. Inheritance in OOP: Continuing our exploration of Object-Oriented Programming, we will let talk about inheritance, one of the most powerful tools for code reuse. Inheritance allows a class to inherit properties and methods from another class, creating a parent-child relationship.
+4. Type guard using typeof & in: When working with dynamic types, it's crucial to ensure that you're dealing with the expected type. TypeScript offers type guards to help with this. In this section, you'll explore how to use the typeof operator to check the type of a variable at runtime, providing a safe way to implement conditional logic based on variable types. 
+5. Type guard using instance of: Building on your knowledge of type guards, this section introduces instanceof, a powerful operator that allows you to check whether an object is an instance of a specific class. This is particularly useful in OOP, where objects might belong to different classes in an inheritance hierarchy. 
+6. Access modifiers: Access modifiers are a key concept in Object-Oriented Programming, allowing you to control the visibility of class properties and methods. In this section, you'll learn about the different access modifiers in TypeScript
+7. Getter and setter: Take control of how your class properties are accessed and modified! You'll learn how to define getters and setters in TypeScript and explore their benefits
+8. Statics in OOP: Static properties and methods belong to the class itself, not to individual instances. We'll explore the concept of static members in TypeScript, showing you how to declare and use them.
+9. Polymorphism: Polymorphism is a fundamental concept in Object-Oriented Programming that allows different classes to be treated as if they are the same through a common interface or base class. In this section, you'll learn how to implement polymorphism in TypeScript.
+10. Abstraction in OOP: Abstraction allows you to hide complex implementation details behind a simple interface, providing a cleaner and more focused interaction with code. In this section, you'll learn how to use abstract classes and interfaces in TypeScript to create high-level blueprints. 
+11. Encapsulation in OOP: Encapsulation is the practice of restricting access to certain parts of a class, ensuring that internal details remain hidden from external code. We will delve into encapsulation in TypeScript, demonstrating how to use access modifiers, private properties, and other techniques to safeguard your code's internal state.
+
+<br>
+> With this knowledge, you can confidently build complex applications that are both maintainable and resilient. Keep practicing and experimenting with these concepts. The more you apply them, the more intuitive they will become!
+
+<br>
+
+## Introduction of Object Oriented Programming
+- Object Oriented Programming (OOP) is a `programming paradigm` that uses objects and classes to structure code.
+
+What is Paradigm?
+- A paradigm is a way of thinking about and approaching problems. The style used to write and organize code.
+
+## Some Paradigms in Programming
+- Procedural Programming: Procedural programming is a programming paradigm that uses procedures or functions to structure code. It focuses on the sequence of actions to be performed. <br>
+Example: 
+```typescript
+function add(a: number, b: number): number {
+  return a + b;
+}
+const result = add(2, 3);
+```
+- Functional Programming: Functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data. <br>
+Example: 
+```typescript
+const add = (a: number, b: number): number => a + b;
+```
+- Declarative Programming: Declarative programming is a programming paradigm that expresses the logic of a computation without describing its control flow. It focuses on what to do rather than how to do it. <br>
+Example: 
+```typescript
+const numbers = [1, 2, 3, 4, 5];
+const evenNumbers = numbers.filter((number) => number % 2 === 0);
+```
+- Object Oriented Programming: Object Oriented Programming is a programming paradigm that uses objects and classes to structure code. It focuses on the organization of code into reusable components. <br>
+Example: 
+```typescript
+class Person {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+  }
+}
+const person = new Person("John", 30);
+person.greet(); // Output: Hello, my name is John and I am 30 years old.
+```
+- Event Driven Programming: Event-driven programming is a programming paradigm that uses events to trigger actions. It focuses on the occurrence of events and the response to those events. <br>
+Example: 
+```typescript
+const button = document.getElementById("myButton");
+button.addEventListener("click", () => {
+  console.log("Button clicked!");
+});
+```
+
+## Building Blocks of OOP
+- Inheritance
+- Polymorphism
+- Encapsulation
+- Abstraction
+
+## Class and Object
+- Class is a blueprint for creating objects.
+- Object is an instance of a class.
+
+**Warning:** this keyword not work in arrow function.
+
+Example: 
+```typescript
+class Person {
+  name: string; // property
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() { // method
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+  }
+}
+
+const person1 = new Person("John", 30); // object
+const person2 = new Person("Jane", 25); // object
+person1.greet(); // Output: Hello, my name is John and I am 30 years old.
+person2.greet(); // Output: Hello, my name is Jane and I am 25 years old.
+```
+
+Using Parameter Properties:
+```typescript
+class Person {
+  constructor(public name: string, public age: number) {} // parameter properties
+
+  greet() {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+  }
+}
+const person1 = new Person("John", 30);
+const person2 = new Person("Jane", 25);
+person1.greet(); // Output: Hello, my name is John and I am 30 years old.
+person2.greet(); // Output: Hello, my name is Jane and I am 25 years old.
+```
+
+## Inheritance in OOP
+- Inheritance is a way to create a new class that is based on an existing class.
+
+Example: 
+```typescript
+class Animal {
+  constructor(public name: string) {}
+
+  makeSound(sound: string) {
+    console.log(`${this.name} says ${sound}.`);
+  }
+}
+
+class Dog extends Animal {
+  constructor(name: string) {
+    super(name); // call the constructor of the parent class
+  }
+}
+class Cat extends Animal {
+  age: number;
+
+  constructor(name: string, age: number) {
+    super(name);
+    this.age = age;
+  }
+  makeSleep() {
+    console.log(`${this.name} is sleeping.`);
+  }
+}
+
+const dog = new Dog("Buddy");
+const cat = new Cat("Whiskers", 2);
+dog.makeSound("Woof"); // Output: Buddy says Woof.
+cat.makeSound("Meow"); // Output: Whiskers says Meow.
+cat.makeSleep(); // Output: Whiskers is sleeping.
+```
