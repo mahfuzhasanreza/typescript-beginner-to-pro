@@ -1812,3 +1812,31 @@ console.log(account.getBalance); // Output: 1000
 account.balance = 2000;
 console.log(account.getBalance); // Output: 2000
 ```
+
+## Statics in OOP
+- Statics are properties and methods that belong to the class itself, rather than to instances of the class.
+- Static properties and methods are defined using the static keyword.
+- Static properties and methods can be accessed using the class name, rather than an instance of the class.
+
+Example: 
+```typescript
+class Counter {
+  static count: number = 0;
+
+  increment() {
+    return (Counter.count = Counter.count + 1);
+  }
+  static decrement() {
+    return Counter.count = Counter.count - 1;
+  }
+}
+
+const instance1= new Counter();
+const instance2 = new Counter();
+
+console.log(instance1.increment()); // Output: 1
+console.log(instance2.increment()); // Output: 2
+
+console.log(Counter.decrement()); // Output: 1
+console.log(Counter.decrement()); // Output: 0
+```
