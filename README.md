@@ -1779,3 +1779,36 @@ savingsAccount.withdraw(500);
 console.log(savingsAccount.getBalance()); // Output: 2500
 console.log(savingsAccount.getAccountHolderName()); // Output: Jane Doe
 ```
+## Getter and Setter
+- Getters and setters are special methods that allow you to access and modify private properties of a class.
+- Getters are used to access the value of a private property.
+- Setters are used to modify the value of a private property.
+- Getters and setters are defined using the get and set keywords, respectively.
+
+Example: 
+```typescript
+class BankAccount {
+  private _balance: number; // private property
+
+  constructor(initialBalance: number) {
+    this._balance = initialBalance;
+  }
+
+  get getBalance(): number { // getter
+    return this._balance;
+  }
+
+  set balance(amount: number) { // setter
+    if (amount < 0) {
+      console.log("Balance cannot be negative");
+    } else {
+      this._balance = amount;
+    }
+  }
+}
+
+const account = new BankAccount(1000);
+console.log(account.getBalance); // Output: 1000
+account.balance = 2000;
+console.log(account.getBalance); // Output: 2000
+```
