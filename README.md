@@ -1707,3 +1707,75 @@ makeSound(animal); // Output: Buddy says Woof!
 makeSound(animal2); // Output: Whiskers says Meow!
 makeSound(animal3); // Output: Generic Animal makes a sound.
 ```
+
+## Access Modifiers
+- Access modifiers are used to control the visibility of class properties and methods.
+- There are three access modifiers in TypeScript:
+  - public: The property or method is accessible from anywhere.
+  - private: The property or method is only accessible within the class.
+  - protected: The property or method is only accessible within the class and its subclasses.
+
+readonly: The property is only accessible within the class and cannot be modified. readonly is not technically an access modifier, but a property modifier.
+
+Convention for Access Modifiers:
+- Public properties should not start with an underscore or hash.
+- Private properties should start with an underscore (_).
+- Protected properties should start with a hash (#).
+- Public methods should not start with an underscore or hash.
+- Private methods should start with an underscore (_).
+- Protected methods should start with a hash (#).
+
+Example: 
+```typescript
+class BankAccount {
+  public readonly id: number; // public property
+  public accountType: string; // public property
+  private _balance: number; // private property
+  protected accountHolder: string; // protected property
+
+  constructor(id: number, accountType: string, _balance: number, accountHolder: string) {
+    this.id = id;
+    this.accountType = accountType;
+    this._balance = _balance;
+    this.accountHolder = accountHolder;
+  }
+
+  public deposit(amount: number) { // public method
+    this._balance += amount;
+  }
+  public withdraw(amount: number) { // public method
+    if (this._balance >= amount) {
+      this._balance -= amount;
+    } else {
+      console.log("Insufficient Balance");
+    }
+  }
+  public getBalance(): number { // public method
+    return this._balance;
+  }
+  protected getAccountHolder(): string { // protected method
+    return this.accountHolder;
+  }
+}
+
+class SavingsAccount extends BankAccount {
+  constructor(id: number, accountType: string, _balance: number, accountHolder: string) {
+    super(id, accountType, _balance, accountHolder);
+  }
+  public getAccountHolderName(): string { // public method
+    return this.getAccountHolder();
+  }
+}
+
+const account = new BankAccount(1, "Savings", 1000, "John Doe");
+account.deposit(500);
+account.withdraw(200);
+console.log(account.getBalance()); // Output: 1300
+// console.log(account._balance); // Error: Property '_balance' is private and only accessible within class 'BankAccount'.
+// console.log(account.accountHolder); // Error: Property 'accountHolder' is protected and only accessible within class 'BankAccount' and its subclasses.
+const savingsAccount = new SavingsAccount(2, "Savings", 2000, "Jane Doe");
+savingsAccount.deposit(1000);
+savingsAccount.withdraw(500);
+console.log(savingsAccount.getBalance()); // Output: 2500
+console.log(savingsAccount.getAccountHolderName()); // Output: Jane Doe
+```
