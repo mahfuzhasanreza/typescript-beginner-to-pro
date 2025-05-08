@@ -1579,7 +1579,7 @@ cat.makeSound("Meow"); // Output: Whiskers says Meow.
 cat.makeSleep(); // Output: Whiskers is sleeping.
 ```
 
-## Type Guard using typeof & in
+## Type Guard or Narrowing using typeof & in
 - Type guards are used to check the type of a variable at runtime.
 - The `typeof` operator is used to check the type of a variable.
 - The `in` operator is used to check if a property exists in an object.
@@ -1629,7 +1629,7 @@ const printUserInfo = (user: UserOrAdmin) => {
 printUserInfo(user);
 ```
 
-## Type Guard using instanceof
+## Type Guard or Narrowing using instanceof
 - The `instanceof` operator is used to check if an object is an instance of a specific class.
 
 Example: 
