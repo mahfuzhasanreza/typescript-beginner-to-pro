@@ -1628,3 +1628,82 @@ const printUserInfo = (user: UserOrAdmin) => {
 
 printUserInfo(user);
 ```
+
+## Type Guard using instanceof
+- The `instanceof` operator is used to check if an object is an instance of a specific class.
+
+Example: 
+```typescript
+class Animal {
+  constructor(public name: string) {}
+}
+class Dog extends Animal {
+  bark() {
+    console.log(`${this.name} says Woof!`);
+  }
+}
+class Cat extends Animal {
+  meow() {
+    console.log(`${this.name} says Meow!`);
+  }
+}
+
+const animal: Animal = new Dog("Buddy");
+const animal2: Animal = new Cat("Whiskers");
+const animal3: Animal = new Animal("Generic Animal");
+
+const makeSound = (animal: Animal) => {
+  if (animal instanceof Dog) {
+    animal.bark();
+  } else if (animal instanceof Cat) {
+    animal.meow();
+  } else {
+    console.log(`${animal.name} makes a sound.`);
+  }
+};
+makeSound(animal); // Output: Buddy says Woof!
+makeSound(animal2); // Output: Whiskers says Meow!
+makeSound(animal3); // Output: Generic Animal makes a sound.
+```
+
+Example: (using is keyword)
+```typescript
+class Animal {
+  constructor(public name: string) {}
+}
+class Dog extends Animal {
+  bark() {
+    console.log(`${this.name} says Woof!`);
+  }
+}
+class Cat extends Animal {
+  meow() {
+    console.log(`${this.name} says Meow!`);
+  }
+}
+
+const animal: Animal = new Dog("Buddy");
+const animal2: Animal = new Cat("Whiskers");
+const animal3: Animal = new Animal("Generic Animal");
+
+const isDog = (animal: Animal): animal is Dog => {
+  return (animal as Dog).bark !== undefined;
+};
+const isCat = (animal: Animal): animal is Cat => {
+  return (animal as Cat).meow !== undefined;
+};
+
+const makeSound = (animal: Animal) => {
+  if (isDog(animal)) {
+    animal.bark();
+  } else if (isCat(animal)) {
+    animal.meow();
+  } else {
+    console.log(`${animal.name} makes a sound.`);
+  }
+};
+
+makeSound(animal); // Output: Buddy says Woof!
+makeSound(animal2); // Output: Whiskers says Meow!
+makeSound(animal3); // Output: Generic Animal makes a sound.
+```
