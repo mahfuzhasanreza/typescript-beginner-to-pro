@@ -1578,3 +1578,53 @@ dog.makeSound("Woof"); // Output: Buddy says Woof.
 cat.makeSound("Meow"); // Output: Whiskers says Meow.
 cat.makeSleep(); // Output: Whiskers is sleeping.
 ```
+
+## Type Guard using typeof & in
+- Type guards are used to check the type of a variable at runtime.
+- The `typeof` operator is used to check the type of a variable.
+- The `in` operator is used to check if a property exists in an object.
+
+Example: (using typeof)
+```typescript
+const add = (param1: string | number, param2: string | number): string | number => {
+  if (typeof param1 === 'number' && typeof param2 === 'number') {
+    return param1 + param2;
+  } else {
+    return param1.toString() + param2.toString();
+  }
+}
+
+console.log(add(2, 3));
+console.log(add("5", 7));
+```
+
+Example: (using in)
+```typescript
+type User = {
+  name: string;
+  age: number;
+};
+type Admin = {
+  name: string;
+  age: number;
+  role: string;
+};
+type UserOrAdmin = User | Admin;
+
+const user: UserOrAdmin = {
+  name: "John",
+  age: 30,
+  role: "admin"
+};
+
+const printUserInfo = (user: UserOrAdmin) => {
+  console.log(`Name: ${user.name}, Age: ${user.age}`);
+  if ("role" in user) {
+    console.log(`Role: ${user.role}`);
+  } else {
+    console.log("Role: User");
+  }
+};
+
+printUserInfo(user);
+```
