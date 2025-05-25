@@ -11,11 +11,11 @@
     }
 
     const instance1= new Counter();
-    console.log(instance1.increment());
+    console.log(instance1.increment()); // 1
 
     const instance2 = new Counter();
-    console.log(instance2.increment());
+    console.log(instance2.increment()); // 2
 
-    console.log(Counter.decrement());
-    console.log(Counter.decrement());
+    console.log(Counter.decrement()); // 1
+    console.log(Counter.decrement()); // 0
 }

@@ -21,6 +21,21 @@ TS Code can be transpiled older version of JS (es6, es5, es3).
 
 for TS configuration file: tsc --init
 
+## ts-node-dev
+- ts-node-dev is a development tool that allows you to run TypeScript code directly without compiling it to JavaScript first.
+- Install it globally using npm:
+```bash
+npm install -g ts-node-dev
+```
+- You can then run your TypeScript files using ts-node-dev:
+```bash
+ts-node-dev --respawn --transpile-only yourfile.ts
+```
+- There is also short alias tsnd for running ts-node-dev:
+```bash
+tsnd --respawn yourfile.ts
+```
+  
 ## Primitive Types and Non Primitive Types (Typescript)
 - Typescript Primitive Types
   - string
