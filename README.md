@@ -2008,3 +2008,44 @@ shapes.forEach((shape) => {
 // Area: 78.53981633974483, Perimeter: 31.41592653589793
 // Area: 24, Perimeter: 20
 ```
+
+## Encapsulation in OOP
+- Encapsulation is the practice of restricting access to certain parts of an object, ensuring that the internal state is protected from unintended interference and misuse.
+- It allows you to bundle the data (properties) and methods (functions) that operate on that data into a single unit, known as a class.
+  
+Example: 
+```typescript
+class BankAccount {
+  private _balance: number; // private property
+
+  constructor(initialBalance: number) {
+    this._balance = initialBalance;
+  }
+
+  deposit(amount: number): void { // public method
+    if (amount > 0) {
+      this._balance += amount;
+    } else {
+      console.log("Deposit amount must be positive.");
+    }
+  }
+
+  withdraw(amount: number): void { // public method
+    if (amount > 0 && amount <= this._balance) {
+      this._balance -= amount;
+    } else {
+      console.log("Insufficient balance or invalid withdrawal amount.");
+    }
+  }
+
+  getBalance(): number { // public method
+    return this._balance;
+  }
+}
+
+const account = new BankAccount(1000);
+account.deposit(500);
+account.withdraw(200);
+console.log(account.getBalance()); // Output: 1300
+// account._balance = 2000; // Error: Property '_balance' is private and only accessible within class 'BankAccount'.
+```
