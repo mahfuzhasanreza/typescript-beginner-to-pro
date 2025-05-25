@@ -1923,3 +1923,88 @@ const rectangle = new Rectangle(4, 6);
 console.log(calculateArea(circle)); // Output: 78.53981633974483
 console.log(calculateArea(rectangle)); // Output: 24
 ```
+
+## Abstraction in OOP
+- Abstraction is the concept of hiding the complex implementation details and showing only the essential features of an object.
+- It allows you to create a simplified model of a complex system, focusing on the relevant aspects while ignoring the unnecessary details.
+- In TypeScript, abstraction can be achieved using abstract classes and interfaces.
+Example: 
+```typescript
+// using abstract class
+abstract class Shape {
+  abstract area(): number; // abstract method
+  abstract perimeter(): number; // abstract method
+  render(): void {
+    console.log(`Area: ${this.area()}, Perimeter: ${this.perimeter()}`);
+  }
+}
+
+class Circle extends Shape {
+  constructor(private radius: number) {
+    super();
+  }
+
+  area(): number {
+    return Math.PI * this.radius * this.radius;
+  }
+
+  perimeter(): number {
+    return 2 * Math.PI * this.radius;
+  }
+}
+class Rectangle extends Shape {
+  constructor(private width: number, private height: number) {
+    super();
+  }
+
+  area(): number {
+    return this.width * this.height;
+  }
+
+  perimeter(): number {
+    return 2 * (this.width + this.height);
+  }
+}
+const circle = new Circle(5);
+const rectangle = new Rectangle(4, 6);
+circle.render(); // Output: Area: 78.53981633974483, Perimeter: 31.41592653589793
+rectangle.render(); // Output: Area: 24, Perimeter: 20
+
+// using interface
+interface Shape {
+  area(): number; // method signature
+  perimeter(): number; // method signature
+}
+
+class Circle implements Shape {
+  constructor(private radius: number) {}
+
+  area(): number {
+    return Math.PI * this.radius * this.radius;
+  }
+
+  perimeter(): number {
+    return 2 * Math.PI * this.radius;
+  }
+}
+class Rectangle implements Shape {
+  constructor(private width: number, private height: number) {}
+
+  area(): number {
+    return this.width * this.height;
+  }
+
+  perimeter(): number {
+    return 2 * (this.width + this.height);
+  }
+}
+const circle2 = new Circle(5);
+const rectangle2 = new Rectangle(4, 6);
+const shapes: Shape[] = [circle2, rectangle2];
+shapes.forEach((shape) => {
+  console.log(`Area: ${shape.area()}, Perimeter: ${shape.perimeter()}`);
+});
+// Output:
+// Area: 78.53981633974483, Perimeter: 31.41592653589793
+// Area: 24, Perimeter: 20
+```
