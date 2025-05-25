@@ -1855,3 +1855,71 @@ console.log(instance2.increment()); // Output: 2
 console.log(Counter.decrement()); // Output: 1
 console.log(Counter.decrement()); // Output: 0
 ```
+
+## Polymorphism
+- Polymorphism is the ability of different classes to be treated as instances of the same class through a common interface or base class.
+- It allows methods to do different things based on the object it is acting upon, even if they share the same method name.
+Example: 
+```typescript
+class Animal {
+  makeSound() {
+    console.log("Animal makes a sound");
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    console.log("Dog barks");
+  }
+}
+
+class Cat extends Animal {
+  makeSound() {
+    console.log("Cat meows");
+  }
+}
+
+const getAnimalSound = (animal: Animal) => {
+  animal.makeSound();
+};
+
+const dog = new Dog();
+const cat = new Cat();
+getAnimalSound(dog); // Output: Dog barks
+getAnimalSound(cat); // Output: Cat meows
+
+// another example
+class Shape {
+  area(): number {
+    return 0;
+  }
+}
+class Circle extends Shape {
+  constructor(radius: number) {
+    super();
+    this.radius = radius;
+  }
+
+  area(): number {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+class Rectangle extends Shape {
+  constructor(private width: number, private height: number) {
+    super();
+  }
+
+  area(): number {
+    return this.width * this.height;
+  }
+}
+
+const calculateArea = (shape: Shape): number => {
+  return shape.area();
+};
+
+const circle = new Circle(5);
+const rectangle = new Rectangle(4, 6);
+console.log(calculateArea(circle)); // Output: 78.53981633974483
+console.log(calculateArea(rectangle)); // Output: 24
+```
