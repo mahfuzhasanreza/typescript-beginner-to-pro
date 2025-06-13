@@ -2374,3 +2374,438 @@ squareAsync(-3).catch(console.error);    // Output: Error: Negative number not a
 
 **Answer:**
 ```typescript
+async function squareAsync(n: number): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+        setTimeout(() => {
+            if(n < 0){
+                reject(new Error("Negative number not allowed"));
+            } else{
+                resolve(n * n);
+            }
+        }, 1000);
+    })
+}
+
+squareAsync(4).then(console.log);        // Output after 1s: 16
+squareAsync(-3).catch(console.error);    // Output: Error: Negative number not allowed
+```
+
+## Some Interview Questions
+
+1. What are some differences between interfaces and types in TypeScript?
+2. What is the use of the `keyof` keyword in TypeScript? Provide an example.
+3. Explain the difference between `any`, `unknown`, and `never` types in TypeScript.
+4. What is the use of `enums` in TypeScript? Provide an example of a numeric and string enum.
+5. What is type inference in TypeScript? Why is it helpful?
+6. How does TypeScript help in improving code quality and project maintainability?
+7. Provide an example of using **union** and **intersection** types in TypeScript.
+
+---
+
+# **1. TypeScript Showdown: Interface vs Type – What’s the Real Difference?**
+
+TypeScript gives developers the best of both worlds: the flexibility of JavaScript and the safety of static typing. But with great power comes great decisions—like whether to use `interface` or `type` to define your objects.
+
+At first glance, `interface` and `type` in TypeScript seem interchangeable. They can both describe the shape of an object, function signatures, or even complex union types. So, what's the difference? Why do both exist? And more importantly, **when should you choose one over the other?**
+
+Let’s dive into **two critical differences** that can shape how you architect your next TypeScript project.
+
+## 1. **Declaration Merging – The Interface Advantage**
+
+One of the standout features of `interface` is **declaration merging**. This means if you declare the same interface name more than once, TypeScript automatically merges their properties.
+
+### Example:
+
+```ts
+interface User {
+  name: string;
+}
+
+interface User {
+  age: number;
+}
+
+// Merged version:
+const user: User = {
+  name: "Alice",
+  age: 30,
+};
+```
+
+This is **not possible** with `type`. If you try to redefine a type with the same name, you’ll get a duplicate identifier error.
+
+### 🚫 Using `type`:
+
+```ts
+type User = {
+  name: string;
+};
+
+type User = {
+  age: number;
+}; // ❌ Error: Duplicate identifier 'User'
+```
+
+**Use case:** Declaration merging is particularly useful when working with third-party libraries or extending existing types without modifying original definitions.
+
+## 2. **Complex Type Composition – The Type Alias Power**
+
+When it comes to **creating union or intersection types**, `type` is more flexible and powerful than `interface`.
+
+### ✅ With `type`:
+
+```ts
+type Admin = {
+  role: "admin";
+};
+
+type RegularUser = {
+  role: "user";
+};
+
+type User = Admin | RegularUser;
+```
+
+You can even combine primitives, tuples, and conditional types—all of which are **not** possible with `interface`.
+
+### ❌ With `interface`:
+
+```ts
+interface Admin {
+  role: "admin";
+}
+
+interface RegularUser {
+  role: "user";
+}
+
+// interface User = Admin | RegularUser; // ❌ Interfaces can’t do this
+```
+
+**Use case:** If you're working with **unions**, **tuples**, or **conditional types**, `type` is your go-to tool.
+
+## So, Which One Should You Use?
+
+* Use **`interface`** when you want to define object shapes, especially when you expect extensions or declaration merging.
+* Use **`type`** when you're composing multiple types, working with unions/intersections, or creating utility types.
+
+In practice, many teams use both. And that's okay—TypeScript is flexible enough to let you mix and match wisely.
+
+## Final Thought
+
+Think of `interface` as your structured blueprint and `type` as your versatile building block. Knowing when and how to use them can significantly impact the readability, maintainability, and scalability of your TypeScript codebase.
+
+---
+
+Sure! Here's an impactful blog post addressing the question **"What is the use of the `keyof` keyword in TypeScript?"** with a clear explanation and example.
+
+---
+
+# 2. Understanding `keyof` in TypeScript: Unlocking the Power of Type-Safe Programming
+
+When working with TypeScript, one of the most powerful tools you can use to write flexible, type-safe code is the `keyof` keyword. It might seem simple at first glance, but `keyof` unlocks a whole new level of type safety and developer productivity—especially when you're dealing with dynamic data structures like forms, APIs, or reusable functions.
+
+## What is `keyof`?
+
+The `keyof` keyword in TypeScript is a **type operator** that returns a union of the **keys of a given object type**.
+
+In simple terms:
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+};
+
+type PersonKeys = keyof Person;
+// Result: "name" | "age"
+```
+
+Here, `PersonKeys` becomes a union of the literal types `"name"` and `"age"`—the keys of the `Person` object. This is incredibly useful when you want to **restrict values to only valid keys** of an object type.
+
+## Why is `keyof` Useful?
+
+Let’s say you're building a utility function that reads a value from an object by key. Without `keyof`, you might accidentally pass an invalid key. But with `keyof`, TypeScript helps you catch mistakes *before* runtime.
+
+### Example: A Safe Object Property Getter
+
+```ts
+type User = {
+  id: number;
+  username: string;
+  isAdmin: boolean;
+};
+
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const user: User = {
+  id: 1,
+  username: "mahfuz",
+  isAdmin: true,
+};
+
+// Works perfectly:
+const username = getProperty(user, "username"); // type is string
+
+// TypeScript error:
+// const invalid = getProperty(user, "email"); // ❌ Argument of type '"email"' is not assignable
+```
+
+Here, `K extends keyof T` ensures that `key` must be one of the keys of the object `T`. This prevents runtime errors due to accessing undefined properties.
+
+---
+
+## Common Use Cases of `keyof`
+
+* **Dynamic forms:** Use `keyof` to map field names safely.
+* **API response validation:** Enforce keys that match an expected interface.
+* **Refactoring helpers:** Create generic functions for logging, updating, or cloning objects.
+
+## Final Thoughts
+
+The `keyof` keyword isn’t just syntactic sugar—it’s a guardrail for writing reliable and maintainable code. Whether you’re building enterprise-level apps or learning TypeScript fundamentals, mastering `keyof` can save you from countless bugs and type mismatches.
+
+So the next time you're working with object types, ask yourself:
+
+> *“Can `keyof` make this code safer or smarter?”*
+
+Most likely, it can.
+
+---
+
+# 3. Mastering TypeScript: Demystifying `any`, `unknown`, and `never`
+
+TypeScript is a powerful superset of JavaScript that brings **static typing** to your code, helping you catch errors before runtime. But with this power comes responsibility—especially when dealing with special types like `any`, `unknown`, and `never`. These types may seem similar at a glance but serve **distinct and critical purposes** in a robust TypeScript codebase.
+
+In this section, we’ll break down the differences between `any`, `unknown`, and `never`—and when to use (or avoid) each one.
+
+## 1. `any` — The “Opt-out” Type
+
+### What it is:
+
+`any` disables type checking entirely for a variable. It's like saying: *"I don’t care what type this is—just trust me."*
+
+```ts
+let value: any;
+
+value = 5;
+value = "hello";
+value = { x: 1 };
+```
+
+You can call any method on an `any` variable, access any property, and assign it to any other type.
+
+### Why it's risky:
+
+Using `any` means giving up all of TypeScript’s safety features. Errors that should be caught during development will surface at runtime instead.
+
+```ts
+value.notAFunction(); // ❌ No error from TypeScript, but crashes at runtime
+```
+
+### When to use:
+
+* Migrating JavaScript to TypeScript (temporarily)
+* Interacting with third-party libraries without types
+* Quick prototyping (but should be removed later)
+
+## 2. `unknown` — The “Safe `any`”
+
+### What it is:
+
+`unknown` is like `any`, but **TypeScript forces you to do a type check** before you use it.
+
+```ts
+let input: unknown = "hello";
+
+if (typeof input === "string") {
+  console.log(input.toUpperCase()); // ✅ Safe
+}
+```
+
+Unlike `any`, you **can’t** use or assign `unknown` without narrowing its type.
+
+```ts
+input.trim(); // ❌ Error: Object is of type 'unknown'
+```
+
+### Why it’s better than `any`:
+
+It maintains flexibility **without sacrificing type safety**. This is ideal when you’re dealing with user input or data from external sources.
+
+### When to use:
+
+* Accepting dynamic or external input (e.g., from APIs)
+* Building type-safe wrapper functions
+* Replacing `any` in most scenarios
+
+## 3. `never` — The Impossible Type
+
+### What it is:
+
+`never` represents values that **never occur**. It’s often used:
+
+* As the return type of functions that **throw errors or never return**
+* In exhaustive checks for **discriminated unions**
+
+```ts
+function throwError(message: string): never {
+  throw new Error(message);
+}
+```
+
+```ts
+type Shape = { kind: "circle" } | { kind: "square" };
+
+function handleShape(shape: Shape) {
+  if (shape.kind === "circle") {
+    // ...
+  } else if (shape.kind === "square") {
+    // ...
+  } else {
+    const _exhaustiveCheck: never = shape; // ✅ Ensures all cases are handled
+  }
+}
+```
+
+### Why it’s powerful:
+
+It enforces **completeness and correctness** in code, especially in pattern matching and switch cases.
+
+### When to use:
+
+* Indicating unreachable code
+* Handling exhaustive checks
+* Returning from functions that **never finish normally**
+
+## Quick Summary Table
+
+| Type      | Flexibility | Type Safety | Common Use Case                       |
+| --------- | ----------- | ----------- | ------------------------------------- |
+| `any`     | ✅ High      | ❌ None      | Prototyping, temp migration           |
+| `unknown` | ✅ High      | ✅ Enforced  | APIs, dynamic inputs, safer `any`     |
+| `never`   | ❌ N/A       | ✅ Absolute  | Exhaustive checks, throwing functions |
+
+## Final Thoughts
+
+Choosing between `any`, `unknown`, and `never` is not just about syntax—it’s about **intention and discipline**. `any` might feel like freedom, but it comes at the cost of reliability. `unknown` helps you write **resilient code**, and `never` ensures **impossible states stay impossible**.
+
+Use them wisely, and you'll level up your TypeScript skills—and your entire codebase.
+
+---
+
+## 4. Understanding Enums in TypeScript: Why & How to Use Them
+
+Enums, short for **enumerations**, are one of TypeScript’s powerful features that provide a way to **define a set of named constants**. They make your code **more readable, maintainable, and expressive**, especially when you're working with a fixed set of values — like user roles, status codes, or color themes.
+
+Let’s break down why enums are useful and explore both **numeric** and **string** enums with practical examples.
+
+### Why Use Enums in TypeScript?
+
+Enums allow developers to:
+
+1. **Avoid magic numbers or strings** in code.
+2. **Group related constants** under a single umbrella.
+3. **Improve code readability** and reduce the chance of errors.
+4. Ensure **type-safety** — TypeScript will complain if you try to use an invalid enum value.
+
+Imagine you're building a task management app. Without enums, you might have code like this:
+
+```ts
+function getTaskStatus(status: string) {
+  if (status === "pending") {
+    return "Waiting to start";
+  } else if (status === "in_progress") {
+    return "Work in progress";
+  } else if (status === "done") {
+    return "Completed";
+  }
+  return "Unknown";
+}
+```
+
+This works — but is error-prone and messy. A typo like `"inprogress"` would silently fail. Enums fix this.
+
+### Example 1: Numeric Enums
+
+TypeScript assigns numeric values to enums by default, starting from 0.
+
+```ts
+enum TaskStatus {
+  Pending,      // 0
+  InProgress,   // 1
+  Done          // 2
+}
+
+function getTaskStatus(status: TaskStatus) {
+  switch (status) {
+    case TaskStatus.Pending:
+      return "Waiting to start";
+    case TaskStatus.InProgress:
+      return "Work in progress";
+    case TaskStatus.Done:
+      return "Completed";
+    default:
+      return "Unknown";
+  }
+}
+
+console.log(getTaskStatus(TaskStatus.InProgress)); // Work in progress
+```
+
+Pro tip: You can customize the starting value if needed:
+
+```ts
+enum TaskStatus {
+  Pending = 1,
+  InProgress = 2,
+  Done = 3
+}
+```
+
+### Example 2: String Enums
+
+String enums are useful when you need readable and meaningful values, especially useful in debugging or when data needs to be serialized (e.g., sent over an API).
+
+```ts
+enum UserRole {
+  Admin = "ADMIN",
+  Editor = "EDITOR",
+  Viewer = "VIEWER"
+}
+
+function getPermissions(role: UserRole): string[] {
+  switch (role) {
+    case UserRole.Admin:
+      return ["create", "edit", "delete", "view"];
+    case UserRole.Editor:
+      return ["edit", "view"];
+    case UserRole.Viewer:
+      return ["view"];
+    default:
+      return [];
+  }
+}
+
+console.log(getPermissions(UserRole.Editor)); // [ 'edit', 'view' ]
+```
+
+### Numeric vs. String Enums: When to Use What?
+
+| Type        | Use When You Need...                                            |
+| ----------- | --------------------------------------------------------------- |
+| **Numeric** | Performance and compactness (especially in memory-limited apps) |
+| **String**  | Human-readable values and clarity (especially for APIs, logs)   |
+
+### Final Thoughts
+
+Enums are an excellent tool in your TypeScript toolbox. They eliminate the risk of typos, organize your constants, and make your code more expressive.
+
+Whether you use **numeric enums for performance** or **string enums for clarity**, leveraging enums is a best practice that elevates your TypeScript codebase to a more professional and maintainable level.
+
+*Pro Tip:* Always give your enums meaningful names and group them logically. And remember — enums are not just for UI states or roles. Use them anywhere constants repeat or represent a set of options.
+
+---
+
